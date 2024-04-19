@@ -28,12 +28,14 @@ session_start();
 
     <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.structure.min.css" rel="stylesheet">
     <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.theme.css" rel="stylesheet">
-
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+   
 
 </head>
 
 <body id="page-top">
+    
+
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -62,7 +64,7 @@ session_start();
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/registro_usuarios.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="bi bi-person-add"></i>
                     <span>Registrar usuario</span></a>
             </li>
 
@@ -72,20 +74,20 @@ session_start();
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_usuarios.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="bi bi-person"></i>
                     <span>Usuarios</span></a>
             </li>
 
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/registrar_empresas.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="bi bi-building-add"></i>
                     <span>Registrar Empresas</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_empresas.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="bi bi-building"></i>
                     <span>Empresas</span></a>
             </li>
 
@@ -101,7 +103,7 @@ session_start();
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/form_login.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="bi bi-box-arrow-in-right"></i>
                     <span>Iniciar Sesion</span></a>
             </li>
 
@@ -110,7 +112,7 @@ session_start();
                     ?>
                     <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/logout.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="bi bi-box-arrow-left"></i>
                     <span>Cerrar Sesion</span></a>
             </li>
                     <?php
@@ -146,3 +148,5 @@ session_start();
 
                 </nav>
                 <!-- End of Topbar -->
+    </body>
+</html>

@@ -7,6 +7,6 @@ if(!defined("RUTAGENERAL")) define("RUTAGENERAL","http://localhost/bolsa/");
 if(!defined("USUARIO")) {define("USUARIO", "root");}
 if(!defined("PASSWORD")) {define("PASSWORD", "");}
 if(!defined("HOST")) {define("HOST", "");}
-if(!defined("NOMBREBD")) {define("NOMBREBD", "bd_bolsa");}
+if(!defined("NOMBREBD")) {define("NOMBREBD", "sistema_laboral");}
 //otras constantes necesarias
 ?>

@@ -20,7 +20,7 @@ if($numero_resultados==1){
 
     $fila = mysqli_fetch_assoc($resultado);
     $_SESSION["SESION_ROL"]=$fila['id_rol'];
-    $_SESSION["SESION_NOMBRES"]=$fila['nombre'];
+    $_SESSION["SESION_NOMBRES"]=$fila['nombres'];
     $_SESSION["SESION_APELLIDOS"]=$fila['apellidos'];
 
     header("Location:../index.php");

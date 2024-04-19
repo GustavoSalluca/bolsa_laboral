@@ -17,7 +17,7 @@ $conexion=conectar();
         $sql="SELECT * FROM empresa";
         $registros=mysqli_query($conexion,$sql);
 
-        echo "<table class='table table-danger table-hover'>";
+        echo "<table class='table table-primary table-hover'>";
 
         echo "<th>Razon Social</th>";
         echo "<th>RUC</th>";
