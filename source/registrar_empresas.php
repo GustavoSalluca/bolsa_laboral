@@ -15,35 +15,35 @@ include("../includes/head.php");
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Razon social</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control"  name="txt_razon_social">
+      <input type="text" class="form-control"  name="txt_razon_social" required="required">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">RUC</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control"  name="txt_ruc">
+      <input type="text" class="form-control"  name="txt_ruc" required="required">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">Direccion</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="txt_direccion">
+      <input type="text" class="form-control" name="txt_direccion" required="required">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">Correo</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="txt_correo" >
+      <input type="text" class="form-control" name="txt_correo" required="required" >
     </div>
   </div>
 
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">Telefono</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="txt_telefono" >
+      <input type="text" class="form-control" name="txt_telefono" required="required" >
     </div>
   </div>
 
