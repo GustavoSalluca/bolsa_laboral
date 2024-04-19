@@ -26,6 +26,11 @@ session_start();
     <!-- Custom styles for this template-->
     <link href="<?php echo RUTAGENERAL; ?>css/sb-admin-2.min.css" rel="stylesheet">
 
+    <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.structure.min.css" rel="stylesheet">
+    <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.theme.css" rel="stylesheet">
+
+
+
 </head>
 
 <body id="page-top">

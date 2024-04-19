@@ -17,7 +17,7 @@ $conexion=conectar();
         $sql="SELECT * FROM empresa";
         $registros=mysqli_query($conexion,$sql);
 
-        echo "<table class='table table-striped table-hover'>";
+        echo "<table class='table table-danger table-hover'>";
 
         echo "<th>Razon Social</th>";
         echo "<th>RUC</th>";
@@ -43,6 +43,7 @@ $conexion=conectar();
   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
   <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
 </svg> Eliminar</button>
+<button type="button" class="btn btn-success" onclick="Asignar(<?php echo $fila['id']; ?>)"> Asignar Usuario</button>
 
                     
 
@@ -54,23 +55,41 @@ $conexion=conectar();
 
     ?>
 
-
-
-
-
-
-
-
     <!-- Fin Zona  central del sistema  -->
 
+</div>
 
+<div id="div_usuarios">
+    <h1>Lista de usuarios</h1>
+        <?php
+            $sql_usuarios = "SELECT * FROM usuarios";
+            $registros_usuarios = mysqli_query($conexion, $sql_usuarios);
+
+            while ($fila_user = mysqli_fetch_array($registros_usuarios)) {
+                echo $fila_user['dni'].' '.$fila_user['nombres'].' '.$fila_user['apellidos'].'<br>';
+            }
+        ?>
 </div>
 <!-- /.container-fluid -->
 <?php
 include("../includes/foot.php");
 ?>
 
+
+
 <script>
+
+$(document).ready(function(){//inicio jquery
+        $("#div_usuarios").dialog({
+            width: 600,
+            height: 400,
+            title:"Lista de Usuarios...",
+        });
+        $("#div_usuarios").dialog("close");
+        
+
+});
+
     function editarEmpresa(id) {
         location.href = "editar_empresa.php?id=" + id;
     }
@@ -80,4 +99,10 @@ include("../includes/foot.php");
             window.location.href = "eliminar_empresa.php?id=" + id;
         }
     }
+
+    function Asignar(pid_empresa){
+        //alert(pid_empresa);
+        $("#div_usuarios").dialog("open");
+    }
+
 </script>

@@ -17,7 +17,7 @@ $conexion=conectar();
         $sql="SELECT * FROM usuarios";
         $registros=mysqli_query($conexion,$sql);
 
-        echo "<table class='table table-striped table-hover'>";
+        echo "<table class='table table-success table-hover'>";
 
         echo "<th>Nombres</th>";
         echo "<th>Apellidos</th>";
