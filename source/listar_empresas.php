@@ -59,19 +59,29 @@ $conexion=conectar();
 
 </div>
 
-<div id="div_usuarios">
-    <h1>Lista de usuarios</h1>
+    <div id="div_usuarios">
+        <h1>Lista de usuarios</h1>
         <?php
-            $sql_usuarios = "SELECT * FROM usuarios";
-            $registros_usuarios = mysqli_query($conexion, $sql_usuarios);
+        $sql_usuarios = "SELECT * FROM usuarios";
+        $registros_usuarios = mysqli_query($conexion, $sql_usuarios);
 
-            while ($fila_user = mysqli_fetch_array($registros_usuarios)) {
-                echo '<a href="#" onClick="asignar('.$fila_user['id'].')" >';
-                echo $fila_user['dni'].' '.$fila_user['nombres'].' '.$fila_user['apellidos'].'<br>';
-                echo '</a>';
+        while ($fila_user = mysqli_fetch_array($registros_usuarios)) {
+            echo '<div>';
+            echo '<span style="color:black;">'.$fila_user['dni'] . ' ' . $fila_user['nombres'] . ' ' . $fila_user['apellidos'] . '</span>';
+            // Verificar si el usuario está asignado a una empresa
+            if ($fila_user['id_empresa'] !== NULL) {
+                // Si el usuario está asignado, mostrar un mensaje en rojo
+                echo '<span style="color:red; "> (Ya asignado)</span>';
+            } else {
+                // Si el usuario no está asignado, mostrar un enlace o botón para asignarlo
+                echo ' <a href="#" onclick="asignarUsuario('.$fila_user['id'].')">Asignar</a>';
             }
+            echo '</div>';
+        }
         ?>
-</div>
+    </div>  
+
+
 <!-- /.container-fluid -->
 <?php
 include("../includes/foot.php");
@@ -115,5 +125,29 @@ $(document).ready(function(){//inicio jquery
         alert('funcion asignar ' +pid_usuario);
         alert('funcion asignar empresa ' +ID_EMPRESA);
     }
+
+    function asignarUsuario(id_usuario) {
+    if (confirm('¿Estás seguro de que quieres asignar este usuario a la empresa?')) {
+        
+    }
+}
+
+function asignarUsuario(id_usuario) {
+    if (confirm('¿Estás seguro de que quieres asignar este usuario a la empresa?')) {
+        $.ajax({
+            type: "POST",
+            url: "asignar_usuario.php",
+            data: { id_empresa: ID_EMPRESA, id_usuario: id_usuario },
+            success: function(response) {
+                alert(response); // Mostrar mensaje de confirmación
+                // Aquí puedes actualizar la interfaz si es necesario
+                
+            },
+            error: function(xhr, status, error) {
+                console.error("Error al procesar la solicitud: " + error);
+            }
+        });
+    }
+}
 
 </script>
