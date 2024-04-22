@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 // Incluir el archivo de conexión a la base de datos
 include("../includes/conectar.php");
 
@@ -36,5 +36,5 @@ $html_lista_usuarios .= '
 // Imprimir el HTML de la lista de usuarios
 echo $html_lista_usuarios;
 
-?> -->
+?> 
 

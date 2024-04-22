@@ -60,24 +60,36 @@ $conexion=conectar();
 </div>
 
     <div id="div_usuarios">
-        <h1>Lista de usuarios</h1>
+        
         <?php
         $sql_usuarios = "SELECT * FROM usuarios";
         $registros_usuarios = mysqli_query($conexion, $sql_usuarios);
 
+        $html_lista_usuarios = '
+        <div class="container">
+            <h1>Lista de usuarios</h1>
+            <div class="list-group">'; // Inicio del contenedor
         while ($fila_user = mysqli_fetch_array($registros_usuarios)) {
-            echo '<div>';
-            echo '<span style="color:black;">'.$fila_user['dni'] . ' ' . $fila_user['nombres'] . ' ' . $fila_user['apellidos'] . '</span>';
+            $html_lista_usuarios .= '
+            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">';
+            $html_lista_usuarios .= '<span>'.$fila_user['dni'] . ' ' . $fila_user['nombres'] . ' ' . $fila_user['apellidos'] . '</span>';
             // Verificar si el usuario está asignado a una empresa
             if ($fila_user['id_empresa'] !== NULL) {
                 // Si el usuario está asignado, mostrar un mensaje en rojo
-                echo '<span style="color:red; "> (Ya asignado)</span>';
+                $html_lista_usuarios .= '<span class="badge badge-danger ">Ya asignado</span>';
             } else {
                 // Si el usuario no está asignado, mostrar un enlace o botón para asignarlo
-                echo ' <a href="#" onclick="asignarUsuario('.$fila_user['id'].')">Asignar</a>';
+                $html_lista_usuarios .= ' <a href="#" onclick="asignarUsuario('.$fila_user['id'].')" class="btn btn-primary">Asignar</a>';
             }
-            echo '</div>';
+            $html_lista_usuarios .= '</a>';
         }
+        $html_lista_usuarios .= '
+            </div>
+        </div>'; // Fin del contenedor
+        
+        // Imprimir el HTML de la lista de usuarios
+        echo $html_lista_usuarios;
+        
         ?>
     </div>  
 
@@ -140,8 +152,17 @@ function asignarUsuario(id_usuario) {
             data: { id_empresa: ID_EMPRESA, id_usuario: id_usuario },
             success: function(response) {
                 alert(response); // Mostrar mensaje de confirmación
-                // Aquí puedes actualizar la interfaz si es necesario
-                
+                // Actualizar la lista de usuarios dentro del diálogo
+                $.ajax({
+                    type: "GET",
+                    url: "actualizar_lista_usuarios.php", // Ruta a un script que devuelve la lista actualizada de usuarios
+                    success: function(data) {
+                        $("#div_usuarios").html(data); // Reemplazar el contenido del div con la lista actualizada
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error al obtener la lista actualizada de usuarios: " + error);
+                    }
+                });
             },
             error: function(xhr, status, error) {
                 console.error("Error al procesar la solicitud: " + error);
@@ -149,5 +170,6 @@ function asignarUsuario(id_usuario) {
         });
     }
 }
+
 
 </script>
