@@ -12,6 +12,8 @@
     $apellidos = $_POST['txt_apellidos'];
     $direccion = $_POST['txt_direccion'];
     $telefono = $_POST['txt_telefono'];
+    $usuario = $_POST['txt_usuario'];
+    $contrasenia = $_POST['txt_contrasenia'];
 
     /*
     echo "DNI recibido: ".$dni;
@@ -23,7 +25,7 @@
     //conexion a la DB
     //gurdamos datos en tabla usuarios
 
-    $sql = "INSERT INTO usuarios (dni,nombres,apellidos,direccion,telefono) VALUES('$dni','$nombres','$apellidos','$direccion','$telefono') ";
+    $sql = "INSERT INTO usuarios (dni,nombres,apellidos,direccion,telefono,usuario,contrasenia) VALUES('$dni','$nombres','$apellidos','$direccion','$telefono','$usuario','$contrasenia') ";
 
     mysqli_query($conexion,$sql) or die("Error al guardar.");
     

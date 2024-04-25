@@ -24,6 +24,7 @@ $conexion=conectar();
         echo "<th>DNI</th>";
         echo "<th>Direccion</th>";
         echo "<th>Telefono</th>";
+        echo "<th>RUC Empresa</th>";
         echo "<th>Acciones</th>";
 
         while($fila = mysqli_fetch_array($registros)){
@@ -33,6 +34,16 @@ $conexion=conectar();
                 echo "<td>".$fila['dni']."</td>";
                 echo "<td>".$fila['direccion']."</td>";
                 echo "<td>".$fila['telefono']."</td>";
+                $id_empresa = $fila['id_empresa'];
+                $razon_social = '';
+                if ($id_empresa !== NULL) {
+                    $sql_empresa = "SELECT razon_social FROM empresa WHERE id = $id_empresa";
+                    $resultado_empresa = mysqli_query($conexion, $sql_empresa);
+                    $fila_empresa = mysqli_fetch_array($resultado_empresa);
+                    $razon_social = $fila_empresa['razon_social'];
+                }
+            
+                echo "<td>".$razon_social."</td>";
 
                 echo "<td>";
                     ?>

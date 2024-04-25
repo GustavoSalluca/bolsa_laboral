@@ -62,15 +62,16 @@ session_start();
                     <span>Inicio</span></a>
             </li>
             <!-- Nav Item - Charts -->
+            
+
+            <?php
+            if(isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"]=='1'){
+            ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/registro_usuarios.php">
                     <i class="bi bi-person-add"></i>
                     <span>Registrar usuario</span></a>
             </li>
-
-            <?php
-            if(isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"]=='1'){
-            ?>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_usuarios.php">

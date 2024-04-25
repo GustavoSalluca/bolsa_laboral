@@ -64,7 +64,12 @@ a{
               <?php
                 }
               ?>
-              <div class="text-center"><button type="submit" class="btn btn-success px-5 mb-5 w-100">Login</button></div>
+              <div class="text-center"><button type="submit" class="btn btn-success px-5  w-50">Login</button></div>
+
+              
+          </form>
+          <form action="form_register.php">
+            <div class="text-center"><button  class="btn btn-primary px-5 mt-3 ">Registrar Usuario</button></div>
           </form>
         </div>
 
