@@ -29,6 +29,6 @@
 
     mysqli_query($conexion,$sql) or die("Error al guardar.");
     
-    header("location: listar_usuarios.php");
+    header("location: form_login.php");
 
 ?>

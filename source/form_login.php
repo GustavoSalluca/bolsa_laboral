@@ -68,9 +68,6 @@ a{
 
               
           </form>
-          <form action="form_register.php">
-            <div class="text-center"><button  class="btn btn-primary px-5 mt-3 ">Registrar Usuario</button></div>
-          </form>
         </div>
 
       </div>

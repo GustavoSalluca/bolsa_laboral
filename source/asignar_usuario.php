@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
 
     // Actualizar la tabla usuarios para marcar el estado de asignación
-    $sql_update_usuario = "UPDATE usuarios SET id_empresa = $id_empresa, estado_asignacion = 1 WHERE id = $id_usuario";
+    $sql_update_usuario = "UPDATE usuarios SET id_empresa = $id_empresa, estado_asignacion = 1, id_rol = 2 WHERE id = $id_usuario";
     mysqli_query($conexion, $sql_update_usuario);
 
     // Actualizar la tabla empresa para agregar el ID del usuario asignado

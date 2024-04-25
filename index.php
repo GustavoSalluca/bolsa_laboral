@@ -8,7 +8,11 @@ include("includes/head.php");
 
     <!-- Inicio Zona  central del sistema  -->
    
-
+    <?php
+    if(isset($_REQUEST['noautorizado'])){
+        echo 'no autorizado';
+    }
+    ?>
 
 
 

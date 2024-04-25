@@ -23,8 +23,14 @@ if($numero_resultados==1){
     $_SESSION["SESION_NOMBRES"]=$fila['nombres'];
     $_SESSION["SESION_APELLIDOS"]=$fila['apellidos'];
 
+    if( $_SESSION["SESION_ROL"] == 0){
+        header("Location:../index.php?noautorizado");
+    }else{
+        header("Location:../index.php");
+    }
 
-    header("Location:../index.php");
+
+   
 
     
 }else{
