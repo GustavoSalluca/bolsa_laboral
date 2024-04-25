@@ -25,7 +25,7 @@
     //conexion a la DB
     //gurdamos datos en tabla usuarios
 
-    $sql = "INSERT INTO usuarios (dni,nombres,apellidos,direccion,telefono,usuario,contrasenia) VALUES('$dni','$nombres','$apellidos','$direccion','$telefono','$usuario','$contrasenia') ";
+    $sql = "INSERT INTO usuarios (dni,nombres,apellidos,direccion,telefono,usuario,contrasenia,id_rol) VALUES('$dni','$nombres','$apellidos','$direccion','$telefono','$usuario','$contrasenia','0') ";
 
     mysqli_query($conexion,$sql) or die("Error al guardar.");
     

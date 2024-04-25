@@ -23,6 +23,7 @@ if($numero_resultados==1){
     $_SESSION["SESION_NOMBRES"]=$fila['nombres'];
     $_SESSION["SESION_APELLIDOS"]=$fila['apellidos'];
 
+
     header("Location:../index.php");
 
     

@@ -7,8 +7,7 @@ include("includes/head.php");
 
 
     <!-- Inicio Zona  central del sistema  -->
-
-
+   
 
 
 
