@@ -68,6 +68,13 @@ session_start();
                     <i class="bi bi-person-add"></i>
                     <span>Registrar usuario</span></a>
             </li>
+            
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/mostrar_ofertas.php">
+                    <i class="bi bi-person-add"></i>
+                    <span>Ofertas Laborales</span></a>
+            </li>
 
             <?php if (isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"] == '2') { ?>
 
