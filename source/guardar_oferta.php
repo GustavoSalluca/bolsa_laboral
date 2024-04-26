@@ -4,7 +4,8 @@
 
     $conexion = conectar();
 
-
+    session_start();
+    $id_empresa = $_SESSION['id_empresa'];
 
     //Recibimos datos del formulario
     
@@ -28,7 +29,9 @@
     //conexion a la DB
     //gurdamos datos en tabla usuarios
 
-    $sql = "INSERT INTO oferta_laboral (titulo,descripcion,fecha_publicacion,fecha_cierre,remuneracion,ubicacion,tipo,limite_postulantes) VALUES('$titulo','$descripcion','$fecha_publicacion','$fecha_cierre','$remuneracion','$ubicacion','$tipo','$limite_postulantes') ";
+   $sql = "INSERT INTO oferta_laboral (titulo, descripcion, fecha_publicacion, fecha_cierre, remuneracion, ubicacion, tipo, limite_postulantes, id_empresa) 
+        VALUES ('$titulo', '$descripcion', '$fecha_publicacion', '$fecha_cierre', '$remuneracion', '$ubicacion', '$tipo', '$limite_postulantes', '$id_empresa')";
+
 
     mysqli_query($conexion,$sql) or die("Error al guardar.");
     

@@ -39,6 +39,8 @@ $conexion=conectar();
             echo "<td>".$fila['ubicacion']."</td>";
             echo "<td>".$fila['tipo']."</td>";
             echo "<td>".$fila['limite_postulantes']."</td>";
+           
+
           
         
             echo "<td>";

@@ -5,14 +5,14 @@ include("includes/head.php");
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-
-    <!-- Inicio Zona  central del sistema  -->
-   
-    <?php
+<?php
     if(isset($_REQUEST['noautorizado'])){
         echo 'no autorizado';
     }
     ?>
+
+    <!-- Inicio Zona  central del sistema  -->
+    
 
 
 

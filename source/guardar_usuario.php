@@ -29,6 +29,17 @@
 
     mysqli_query($conexion,$sql) or die("Error al guardar.");
     
-    header("location: form_login.php");
+    session_start();
+
+    // Redirección según el estado de inicio de sesión y el rol del usuario
+    if (isset($_SESSION["SESION_ROL"])) {
+        if ($_SESSION["SESION_ROL"] == '1') {
+            header("location: listar_usuarios.php");
+        } else {
+            header("location: form_login.php");
+        }
+    } else {
+        header("location: form_login.php");
+    }
 
 ?>

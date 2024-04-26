@@ -62,19 +62,19 @@ session_start();
                     <span>Inicio</span></a>
             </li>
             <!-- Nav Item - Charts -->
-            
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/registro_usuarios.php">
-                    <i class="bi bi-person-add"></i>
-                    <span>Registrar usuario</span></a>
-            </li>
-            
-
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/mostrar_ofertas.php">
                     <i class="bi bi-person-add"></i>
                     <span>Ofertas Laborales</span></a>
             </li>
+            
+                <?php if (!isset($_SESSION["SESION_NOMBRES"]) || (isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"] == '1')) { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/registro_usuarios.php">
+                    <i class="bi bi-person-add"></i>
+                    <span>Registrar usuario</span></a>
+            </li>
+            <?php } ?>
 
             <?php if (isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"] == '2') { ?>
 
@@ -95,11 +95,6 @@ session_start();
             <?php
             if(isset($_SESSION["SESION_ROL"]) && $_SESSION["SESION_ROL"]=='1'){
             ?>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/registro_usuarios.php">
-                    <i class="bi bi-person-add"></i>
-                    <span>Registrar usuario</span></a>
-            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_usuarios.php">
@@ -115,6 +110,12 @@ session_start();
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_empresas.php">
+                    <i class="bi bi-building"></i>
+                    <span>Empresas</span></a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/registrar_oferta.php">
                     <i class="bi bi-building-add"></i>
                     <span>Registrar Oferta Laboral</span></a>
@@ -124,15 +125,7 @@ session_start();
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_ofertas.php">
                     <i class="bi bi-building-add"></i>
                     <span>Oferta Laboral</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_empresas.php">
-                    <i class="bi bi-building"></i>
-                    <span>Empresas</span></a>
-            </li>
-
-            
+            </li>  
 
             <?php
                 }
