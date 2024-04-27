@@ -22,22 +22,19 @@ if($numero_resultados==1){
     $_SESSION["SESION_ROL"]=$fila['id_rol'];
     $_SESSION["SESION_NOMBRES"]=$fila['nombres'];
     $_SESSION["SESION_APELLIDOS"]=$fila['apellidos'];
+    $_SESSION["SESION_ID_EMPRESA"] = $fila['id_empresa'];
+
+
 
     if( $_SESSION["SESION_ROL"] == 0){
         header("Location:../index.php?noautorizado");
     }else{
         header("Location:../index.php");
     }
-
-
-   
-
     
 }else{
     header("Location:form_login.php?error_login=error");
 }
-
-
 
 ?>
 

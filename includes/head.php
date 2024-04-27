@@ -29,7 +29,7 @@ session_start();
     <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.structure.min.css" rel="stylesheet">
     <link href="<?php echo RUTAGENERAL; ?>js/jquery-ui.theme.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 </head>
 
@@ -87,7 +87,7 @@ session_start();
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_ofertas.php">
                         <i class="bi bi-building-add"></i>
-                        <span>Oferta Laboral</span></a>
+                        <span>Listar Ofertas</span></a>
                 </li>
 
                 <?php } ?>
@@ -99,7 +99,7 @@ session_start();
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_usuarios.php">
                     <i class="bi bi-person"></i>
-                    <span>Usuarios</span></a>
+                    <span>Listar Usuarios</span></a>
             </li>
 
 
@@ -112,7 +112,7 @@ session_start();
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_empresas.php">
                     <i class="bi bi-building"></i>
-                    <span>Empresas</span></a>
+                    <span>Listar Empresas</span></a>
             </li>
 
             <li class="nav-item">
@@ -124,7 +124,7 @@ session_start();
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_ofertas.php">
                     <i class="bi bi-building-add"></i>
-                    <span>Oferta Laboral</span></a>
+                    <span>Listar Ofertas</span></a>
             </li>  
 
             <?php
@@ -155,7 +155,6 @@ session_start();
                 }
             ?>
 
-
         </ul>
         <!-- Fin Sidebar - menu izquierdo -->
 
@@ -167,6 +166,9 @@ session_start();
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow d-flex flex-row-reverse">
+                    <span class="material-symbols-outlined">
+                        person
+                    </span>
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -179,9 +181,6 @@ session_start();
                             echo "Inicie sesion"
 
                     ?>
-
-
-
                 </nav>
                 <!-- End of Topbar -->
     </body>

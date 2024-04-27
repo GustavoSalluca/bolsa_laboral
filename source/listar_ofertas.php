@@ -2,6 +2,9 @@
 include("../includes/head.php");
 include("../includes/conectar.php");
 $conexion=conectar();
+
+    $id_empresa = $_SESSION["SESION_ID_EMPRESA"];
+    $id_rol = $_SESSION["SESION_ROL"];
 ?>
 
 <!-- Begin Page Content -->
@@ -14,15 +17,30 @@ $conexion=conectar();
 
     <?php
 
-        $sql="SELECT * FROM oferta_laboral";
+if ($id_rol == 1) {
+    // Si el id_rol es igual a 1, seleccionar todas las ofertas laborales
+    $sql = "SELECT * FROM oferta_laboral";
+} else {
+    // Si el id_rol no es igual a 1, seleccionar las ofertas laborales del id_empresa
+    $sql = "SELECT * FROM oferta_laboral WHERE id_empresa = $id_empresa";
+}
         $registros=mysqli_query($conexion,$sql);
+
+        
+if (!$registros) {
+    // Si la consulta falla, muestra el mensaje de error de MySQL
+    echo "Error en la consulta: " . mysqli_error($conexion);
+} else {
+    // Si la consulta tiene éxito, procesa los resultados
+    // ...
+}
 
         echo "<table class='table table-primary table-hover'>";
 
         echo "<th>Titulo</th>";
         echo "<th>Descripcion</th>";
         echo "<th>Fecha Publicacion</th>";
-        echo "<th>fecha Cierre</th>";
+        echo "<th>Fecha Cierre</th>";
         echo "<th>Remuneracion</th>";
         echo "<th>Ubicacion</th>";
         echo "<th>Tipo</th>";
@@ -68,6 +86,8 @@ $conexion=conectar();
     <!-- Fin Zona  central del sistema  -->
 
 </div>
+
+
 
 
 
