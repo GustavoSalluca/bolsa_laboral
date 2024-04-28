@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_query($conexion, $sql_update_empresa);
 
     // Actualizar la tabla usuarios
-    $sql_update_usuario = "UPDATE usuarios SET id_empresa = NULL, estado_asignacion = 0 WHERE id_empresa = $id_empresa";
+    $sql_update_usuario = "UPDATE usuarios SET id_empresa = NULL, estado_asignacion = 0, id_rol = 3  WHERE id_empresa = $id_empresa";
     mysqli_query($conexion, $sql_update_usuario);
 
     echo "Usuario quitado de la empresa exitosamente";

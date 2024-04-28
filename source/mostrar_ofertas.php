@@ -10,7 +10,7 @@ $conexion = conectar();
     
     <?php
     // Consulta para obtener todas las ofertas laborales
-    $sql = "SELECT * FROM oferta_laboral";
+    $sql = "SELECT * FROM oferta_laboral ORDER BY id DESC";
     $resultado = mysqli_query($conexion, $sql);
 
     // Comprobar si hay resultados
