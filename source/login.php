@@ -8,33 +8,29 @@ session_start();
 $usuario = $_POST['txt_usuario'];
 $password = $_POST['txt_password'];
 
-$sql="SELECT * FROM  usuarios WHERE usuario='$usuario' and contrasenia='$password' ";
+$sql = "SELECT * FROM  usuarios WHERE usuario='$usuario' and contrasenia='$password' ";
 
-$resultado = mysqli_query($conexion,$sql);
+$resultado = mysqli_query($conexion, $sql);
 
 $numero_resultados = mysqli_affected_rows($conexion);
 
 //echo "Se encontro".$numero_resultados."fil(s)";
 
-if($numero_resultados==1){
+if ($numero_resultados == 1) {
 
     $fila = mysqli_fetch_assoc($resultado);
-    $_SESSION["SESION_ROL"]=$fila['id_rol'];
-    $_SESSION["SESION_NOMBRES"]=$fila['nombres'];
-    $_SESSION["SESION_APELLIDOS"]=$fila['apellidos'];
+    $_SESSION["SESION_ROL"] = $fila['id_rol'];
+    $_SESSION["SESION_NOMBRES"] = $fila['nombres'];
+    $_SESSION["SESION_APELLIDOS"] = $fila['apellidos'];
     $_SESSION["SESION_ID_EMPRESA"] = $fila['id_empresa'];
     $_SESSION["SESION_ID_USUARIO"] = $fila['id'];
 
 
-    if( $_SESSION["SESION_ROL"] == 0){
+    if ($_SESSION["SESION_ROL"] == 0) {
         header("Location:../index.php?noautorizado");
-    }else{
+    } else {
         header("Location:../index.php");
     }
-    
-}else{
+} else {
     header("Location:form_login.php?error_login=error");
 }
-
-?>
-

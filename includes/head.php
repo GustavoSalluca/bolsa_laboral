@@ -1,6 +1,30 @@
 <?php
 include ("config.php");
+
 session_start();
+
+// Suponiendo que tienes una conexión a la base de datos, puedes obtener la ruta de la imagen del usuario actual
+// Aquí se asume que tienes una tabla llamada 'usuarios' y un campo 'ruta_imagen' que almacena la ruta de la imagen de perfil
+/*if (isset($_SESSION['SESION_ID_USUARIO'])) {
+    
+    $conexion = conectar(); // Función para establecer la conexión a la base de datos
+
+    $id_usuario = $_SESSION['SESION_ID_USUARIO'];
+    $query = "SELECT ruta_imagen FROM usuarios WHERE id = $id_usuario";
+    $resultado = mysqli_query($conexion, $query);
+
+    if ($fila = mysqli_fetch_assoc($resultado)) {
+        $ruta_imagen = $fila['ruta_imagen'];
+    } else {
+        // Si no se encuentra la ruta de la imagen, puedes establecer una imagen por defecto o dejarla vacía
+        $ruta_imagen = ""; // Establecer una ruta de imagen por defecto
+    }
+
+    mysqli_close($conexion);
+} else {
+    // Si no hay una sesión iniciada, puedes establecer una imagen por defecto o dejarla vacía
+    $ruta_imagen = ""; // Establecer una ruta de imagen por defecto
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -34,8 +58,6 @@ session_start();
 </head>
 
 <body id="page-top">
-    
-
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -175,14 +197,10 @@ session_start();
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow d-flex flex-row-reverse">
-                    <span class="material-symbols-outlined">
-                        person
-                    </span>
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
 
+                    <!-- <img src="<?php echo $fila["ruta_imagen"]; ?>" alt="Imagen de perfil" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;"> -->
+
+                    <div class="d-none d-sm-inline-block mr-2">
                     <?php
                         if(isset($_SESSION['SESION_NOMBRES']))
                             echo "Bienvenido ".$_SESSION['SESION_NOMBRES']." ".$_SESSION['SESION_APELLIDOS'];
@@ -190,6 +208,7 @@ session_start();
                             echo "Inicie sesion"
 
                     ?>
+                    </div>
                 </nav>
                 <!-- End of Topbar -->
     </body>

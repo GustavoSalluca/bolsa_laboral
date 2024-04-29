@@ -20,4 +20,3 @@ if (isset($_GET['id'])) {
     exit();
 }
 header("location: listar_ofertas.php");
-?>

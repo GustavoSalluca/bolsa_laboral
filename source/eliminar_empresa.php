@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
 
     if ($resultado) {
         echo "Empresa eliminado correctamente.";
-    } else {    
+    } else {
         echo "Error al eliminar Empresa.";
     }
 } else {
@@ -20,4 +20,3 @@ if (isset($_GET['id'])) {
     exit();
 }
 header("location: listar_empresas.php");
-?>

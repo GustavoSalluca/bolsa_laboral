@@ -17,4 +17,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Error: Método de solicitud incorrecto";
 }
-?>
