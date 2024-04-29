@@ -130,6 +130,15 @@ session_start();
             <?php
                 }
             ?>
+            <?php if(isset($_SESSION['SESION_NOMBRES'])) { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/perfil.php">
+                    <i class="bi bi-building"></i>
+                    <span>Configuracion</span></a>
+            </li>
+            <?php
+                }
+            ?>
 
             <?php
                 if(!isset($_SESSION["SESION_NOMBRES"])){

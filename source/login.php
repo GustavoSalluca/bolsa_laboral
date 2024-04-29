@@ -23,7 +23,7 @@ if($numero_resultados==1){
     $_SESSION["SESION_NOMBRES"]=$fila['nombres'];
     $_SESSION["SESION_APELLIDOS"]=$fila['apellidos'];
     $_SESSION["SESION_ID_EMPRESA"] = $fila['id_empresa'];
-
+    $_SESSION["SESION_ID_USUARIO"] = $fila['id'];
 
 
     if( $_SESSION["SESION_ROL"] == 0){
