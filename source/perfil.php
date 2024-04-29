@@ -36,7 +36,34 @@
                     </div>
                         <p><?php echo $fila["nombres"] . " " . $fila["apellidos"]; ?></p>
                         <p><?php echo $fila["dni"]; ?></p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarFotoModal">
+        Editar foto
+    </button>
                     </div>
+
+                    <div class="modal fade" id="editarFotoModal" tabindex="-1" role="dialog" aria-labelledby="editarFotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarFotoModalLabel">Editar Foto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para cargar nueva imagen -->
+                <form action="guardar_imagen.php" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="nuevaImagen">Seleccione una nueva imagen:</label>
+                        <input type="file" class="form-control-file" id="nuevaImagen" name="nuevaImagen">
+                    </div>
+                    <input type="hidden" name="idUsuario" value="<?php echo $fila['id']; ?>">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
                     <div class="col-md-8">
                         <table class="table">
                             <tbody>
