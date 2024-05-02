@@ -86,14 +86,6 @@ $conexion = conectar();
 
 
 </div>
-</div>
-
-
-
-
-
-
-
 
 <?php
 include("../includes/foot.php");

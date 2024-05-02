@@ -26,6 +26,7 @@ $conexion = conectar();
     echo "<th>Telefono</th>";
     echo "<th>RUC Empresa</th>";
     echo "<th>Autorizacion</th>";
+    echo "<th>Rol</th>";
     echo "<th>Acciones</th>";
 
     while ($fila = mysqli_fetch_array($registros)) {
@@ -43,13 +44,26 @@ $conexion = conectar();
             $fila_empresa = mysqli_fetch_array($resultado_empresa);
             $razon_social = $fila_empresa['razon_social'];
         }
-
+        
         echo "<td>" . $razon_social . "</td>";
         if ($fila['id_rol'] == 0) {
             echo "<td>No</td>";
         } else {
             echo "<td>Si</td>";
         }
+
+        
+
+        if ($fila['id_rol'] == '1') {
+            echo "<td>Administrador</td>";
+        } if ($fila['id_rol'] == '2') {
+            echo "<td>Empresario</td>";
+        } if ($fila['id_rol'] == '3') {
+            echo "<td>Postulante</td>";
+        } if ($fila['id_rol'] == '0') {
+            echo "<td>No asignado</td>";
+        }
+        
 
         echo "<td>";
     ?>
