@@ -68,7 +68,12 @@ $conexion = conectar();
                                         </span> </strong> <?php echo $fila['limite_postulantes']; ?></p>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary">Postular</a>
+                                            <form method="post" action="registrar_postulacion.php">
+                        <input type="hidden" name="id_oferta" value="<?php echo $fila['id']; ?>">
+                        <input type="hidden" name="id_usuario" value="<?php echo $_SESSION["SESION_ID_USUARIO"]; ?>">
+                        <button type="submit" name="postular" class="btn btn-primary">Postular</button>
+                    </form>
+
                     </div>
                 </div>
             </div>

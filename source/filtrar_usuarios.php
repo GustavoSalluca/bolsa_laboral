@@ -5,6 +5,8 @@ include("../includes/conectar.php");
 $conexion = conectar();
 
 ?>
+<div  class="container-fluid">
+
 <h1>Lista de usuarios</h1>
 
 <div>
@@ -16,6 +18,11 @@ $conexion = conectar();
         <option value="3">Postulante</option>
     </select>
 </div>
+
+<div class="cotainer">
+        <input class="form-control"id="myInput" type="text" placeholder="Search...">
+        <br>
+    </div>
 
 <?php
 if (isset($_GET['rol'])) {
@@ -32,7 +39,7 @@ if (isset($_GET['rol'])) {
     $registros = mysqli_query($conexion, $sql);
 
     
-    echo "<table class='table table-success table-hover'>";
+    echo "<table id='myTable' class='table table-success table-hover'>";
     
     echo "<th>Nombres</th>";
     echo "<th>Apellidos</th>";
@@ -96,6 +103,9 @@ while ($fila = mysqli_fetch_array($registros)) {
     echo "</tr>"; 
 }
 echo "</table>"; 
+?>
+</div>
+<?php
 } else {
     
     header("Location: lista_usuarios.php");
@@ -107,6 +117,17 @@ include("../includes/foot.php");
 ?>
 
 <script>
+
+$(document).ready(function(){
+        $("#myInput").on("keyup",function(){
+            var value=
+    $(this).val().toLowerCase();
+    $("#myTable tr").filter(function(){
+        $(this).toggle($(this).text().toLowerCase().indexOf(value)>-1)
+    });
+        });
+    });
+
     function filtrarUsuarios() {
         var rolSeleccionado = document.getElementById("rol").value;
         var url = "filtrar_usuarios.php?rol=" + rolSeleccionado;

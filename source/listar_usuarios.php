@@ -5,29 +5,35 @@ $conexion = conectar();
 ?>
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+    <div class="container-fluid">
 
 
-    <!-- Inicio Zona  central del sistema  -->
-    <h1>Lista de usuarios</h1>
+        <!-- Inicio Zona  central del sistema  -->
+        <h1>Lista de usuarios</h1>
 
-    <div>
-    <label for="rol">Filtrar por rol:</label>
-    <select id="rol" onchange="filtrarUsuarios()">
-        <option value="todos">Todos los roles</option>
-        <option value="1">Administrador</option>
-        <option value="2">Empresario</option>
-        <option value="3">Postulante</option>
-    </select>
-</div>
+        <div>
+        <label for="rol">Filtrar por rol:</label>
+        <select id="rol" onchange="filtrarUsuarios()">
+            <option value="todos">Todos los roles</option>
+            <option value="1">Administrador</option>
+            <option value="2">Empresario</option>
+            <option value="3">Postulante</option>
+        </select>
+    </div>
 
+        <div class="cotainer">
+                <input class="form-control"id="myInput" type="text" placeholder="Search...">
+                <br>
+            </div>
 
     <?php
 
     $sql = "SELECT * FROM usuarios";
-    $registros = mysqli_query($conexion, $sql);
+     $registros = mysqli_query($conexion, $sql);
 
-    echo "<table class='table table-success table-hover'>";
+    
+
+    echo "<table id='myTable' class='table table-success table-hover'>";
 
     echo "<th>Nombres</th>";
     echo "<th>Apellidos</th>";
@@ -101,14 +107,25 @@ $conexion = conectar();
 
     <!-- Fin Zona  central del sistema  -->
 
-
 </div>
 <!-- /.container-fluid -->
+
 <?php
 include("../includes/foot.php");
 ?>
 
 <script>
+
+$(document).ready(function(){
+        $("#myInput").on("keyup",function(){
+            var value=
+    $(this).val().toLowerCase();
+    $("#myTable tr").filter(function(){
+        $(this).toggle($(this).text().toLowerCase().indexOf(value)>-1)
+    });
+        });
+    });
+
     function editarUsuario(id) {
         location.href = "editar_usuario.php?id=" + id;
     }
@@ -125,7 +142,7 @@ include("../includes/foot.php");
         }
     }
 
-    function filtrarUsuarios() {
+   /* function filtrarUsuarios() {
         var rolSeleccionado = document.getElementById("rol").value;
         var url = "filtrar_usuarios.php?rol=" + rolSeleccionado;
         window.location.href = url;
@@ -134,5 +151,5 @@ include("../includes/foot.php");
     var parametros = new URLSearchParams(window.location.search);
     var rolFiltrado = parametros.get('rol');
     document.getElementById("rol").value = rolFiltrado;
-
+*/
 </script>

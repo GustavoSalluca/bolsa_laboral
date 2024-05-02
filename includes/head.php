@@ -152,6 +152,17 @@ session_start();
             <?php
                 }
             ?>
+
+                        <?php if(isset($_SESSION['SESION_NOMBRES'])) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_postulaciones.php">
+                                <i class="bi bi-building"></i>
+                                <span>Mis Postulaciones</span></a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+
             <?php if(isset($_SESSION['SESION_NOMBRES'])) { ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/perfil.php">

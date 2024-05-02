@@ -87,6 +87,12 @@ $id_rol = $_SESSION["SESION_ROL"];
     echo "</table>";
 
     ?>
+    <div id="postulantes">
+
+    
+    </div>
+
+
 
     <!-- Fin Zona  central del sistema  -->
 
@@ -113,4 +119,20 @@ include("../includes/foot.php");
             window.location.href = "eliminar_oferta.php?id=" + id;
         }
     }
+
+    function administrarOferta(id_oferta) {
+   
+    $.ajax({
+        url: 'obtener_postulantes.php',
+        type: 'GET',
+        data: { id_oferta: id_oferta },
+        success: function(response) {
+        
+            $('#postulantes').html(response);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
 </script>
