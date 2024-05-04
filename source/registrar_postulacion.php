@@ -11,10 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['postular'])) {
     // Insertar los datos en la tabla de postulaciones
     $sql_insert = "INSERT INTO postulaciones (id_usuario, id_oferta, fecha_hora_postulacion, estado_actual) VALUES ('$id_usuario', '$id_oferta', '$fecha_hora_postulacion', 'abierto')";
     if(mysqli_query($conexion, $sql_insert)) {
-        
-        header("Location: listar_postulaciones.php");
+        // Reducir el límite de postulantes en la oferta laboral correspondiente
+        $sql_update_limite = "UPDATE oferta_laboral SET limite_postulantes = limite_postulantes - 1 WHERE id = '$id_oferta'";
+        if(mysqli_query($conexion, $sql_update_limite)) {
+            // Redireccionar después de una postulación exitosa
+            header("Location: listar_postulaciones.php");
+        } else {
+            echo "<script>alert('Error al intentar postularse.');</script>";
+        }
     } else {
         echo "<script>alert('Error al intentar postularse.');</script>";
     }
 }
-?>
+

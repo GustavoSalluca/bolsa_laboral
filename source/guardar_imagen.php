@@ -44,4 +44,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 header("location: perfil.php"); // Redireccionar a la página de listado de usuarios
-?>

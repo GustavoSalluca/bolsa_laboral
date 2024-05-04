@@ -86,8 +86,38 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <strong>Subir CV</strong>
-                                        <input class="form-control" type="file" id="formFile">
+                                    
+                                    <!-- Botón para abrir el modal -->
+                                    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#subirArchivoModal">
+                                        Subir Archivo
+                                    </button>
+
+                                     <!-- Modal para subir archivo -->
+                                        <div class="modal fade" id="subirArchivoModal" tabindex="-1" role="dialog" aria-labelledby="subirArchivoModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="subirArchivoModalLabel">Subir Archivo</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- Formulario para cargar nueva imagen -->
+                                                        <form action="guardar_cv.php" method="post" enctype="multipart/form-data">
+                                                            <div class="form-group">
+                                                                <label for="nuevoDocumento">Seleccione un archivo:</label>
+                                                                <input type="file" class="form-control-file" id="nuevoDocumento" name="nuevoDocumento">
+                                                            </div>
+                                                            <input type="hidden" name="idUsuario" value="<?php echo $fila['id']; ?>">
+                                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </td>
                                 </tr>
                             </tbody>

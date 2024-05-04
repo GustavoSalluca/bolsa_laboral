@@ -153,15 +153,22 @@ session_start();
                 }
             ?>
 
-                        <?php if(isset($_SESSION['SESION_NOMBRES'])) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_postulaciones.php">
-                                <i class="bi bi-building"></i>
-                                <span>Mis Postulaciones</span></a>
-                        </li>
-                        <?php
-                            }
-                        ?>
+            <?php if(isset($_SESSION['SESION_ROL']) && $_SESSION['SESION_ROL'] == '3') { ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_postulaciones.php">
+                        <i class="bi bi-building"></i>
+                        <span>Mis Postulaciones</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/listar_notificaciones.php">
+                        <i class="bi bi-building"></i>
+                        <span>Notificaciones</span>
+                    </a>
+                </li>
+
+            <?php } ?>
 
             <?php if(isset($_SESSION['SESION_NOMBRES'])) { ?>
             <li class="nav-item">

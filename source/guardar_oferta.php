@@ -18,21 +18,8 @@ $limite_postulantes = $_POST['txt_limite_postulantes'];
 
 $id_empresa = $_SESSION["SESION_ID_EMPRESA"];
 
-
-
-/*
-    echo "DNI recibido: ".$dni;
-    echo "nombres recibido: ".$nombres;
-    echo "apellidos recibido: ".$apellidos;
-    echo "direccion recibido: ".$direccion;
-    echo "telefono recibido: ".$telefono;
-    */
-//conexion a la DB
-//gurdamos datos en tabla usuarios
-
 $sql = "INSERT INTO oferta_laboral (titulo, descripcion, fecha_publicacion, fecha_cierre, remuneracion, ubicacion, tipo, limite_postulantes, id_empresa) 
                 VALUES ('$titulo', '$descripcion', '$fecha_publicacion', '$fecha_cierre', '$remuneracion', '$ubicacion', '$tipo', '$limite_postulantes', '$id_empresa')";
-
 
 mysqli_query($conexion, $sql) or die("Error al guardar.");
 

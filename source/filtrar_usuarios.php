@@ -9,19 +9,24 @@ $conexion = conectar();
 
 <h1>Lista de usuarios</h1>
 
-<div>
-    <label for="rol">Filtrar por rol:</label>
-    <select id="rol" onchange="filtrarUsuarios()">
-        <option value="todos">Todos los roles</option>
-        <option value="1">Administrador</option>
-        <option value="2">Empresario</option>
-        <option value="3">Postulante</option>
-    </select>
-</div>
+    <div class="d-flex justify-content-between">
+        <div>
+        <svg xmlns="http://www.w3.org/2000/svg" for="rol" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5z"/>
+        </svg>
+        <select id="rol" onchange="filtrarUsuarios()" style="border: none;">
+            <option value="todos">Todos los roles</option>
+            <option value="1">Administrador</option>
+            <option value="2">Empresario</option>
+            <option value="3">Postulante</option>
+            <option value="0">No Asignados</option>
+        </select>
+    </div>
 
-<div class="cotainer">
-        <input class="form-control"id="myInput" type="text" placeholder="Search...">
-        <br>
+    <div class="pb-2">
+            <input class="form-control"id="myInput" type="text" placeholder="Search...">
+            
+        </div>
     </div>
 
 <?php
@@ -127,6 +132,22 @@ $(document).ready(function(){
     });
         });
     });
+
+    function editarUsuario(id) {
+        location.href = "editar_usuario.php?id=" + id;
+    }
+
+    function eliminarUsuario(id) {
+        if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+            window.location.href = "eliminar_usuario.php?id=" + id;
+        }
+    }
+
+    function autousuario(id) {
+        if (confirm('estas seguro se autorizar usuario')) {
+            location.href = "autorizar_usuario.php?id=" + id;
+        }
+    }
 
     function filtrarUsuarios() {
         var rolSeleccionado = document.getElementById("rol").value;

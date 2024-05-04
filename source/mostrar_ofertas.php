@@ -19,6 +19,18 @@ $conexion = conectar();
             if ($contador % 4 == 0) {
                 echo '<div class="row">'; // Inicia una nueva fila cada 4 tarjetas
             }
+
+            // Verificar si la oferta ha vencido
+            $fecha_actual = date('Y-m-d');
+            $fecha_cierre = $fila['fecha_cierre'];
+            $estado_oferta = "Disponible";
+
+            if ($fecha_actual > $fecha_cierre) {
+                $estado_oferta = "Vencido";
+            } elseif ($fila['limite_postulantes'] <= 0) {
+                $estado_oferta = "No hay cupos";
+            }
+
     ?>
             <div class="col-md-3 mb-4"> <!-- Crea una columna de 3 para cada tarjeta (12 columnas en total en un row) -->
                 <div class="card">
@@ -68,11 +80,16 @@ $conexion = conectar();
                                         </span> </strong> <?php echo $fila['limite_postulantes']; ?></p>
                             </div>
                         </div>
-                                            <form method="post" action="registrar_postulacion.php">
-                        <input type="hidden" name="id_oferta" value="<?php echo $fila['id']; ?>">
-                        <input type="hidden" name="id_usuario" value="<?php echo $_SESSION["SESION_ID_USUARIO"]; ?>">
-                        <button type="submit" name="postular" class="btn btn-primary">Postular</button>
-                    </form>
+                        <?php if ($estado_oferta == "Disponible") { ?>
+                            <form method="post" action="registrar_postulacion.php">
+                                <input type="hidden" name="id_oferta" value="<?php echo $fila['id']; ?>">
+                                <input type="hidden" name="id_usuario" value="<?php echo $_SESSION["SESION_ID_USUARIO"]; ?>">
+                                <button type="submit" name="postular" class="btn btn-primary">Postular</button>
+                            </form>
+                        <?php } else { ?>
+                            <button type="button" class="btn btn-secondary" disabled><?php echo $estado_oferta; ?></button>
+                        <?php } ?>
+
 
                     </div>
                 </div>

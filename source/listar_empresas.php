@@ -9,7 +9,16 @@ $conexion = conectar();
 
 
     <!-- Inicio Zona  central del sistema  -->
-    <h1>Lista de empresas</h1>
+    <div class="d-flex justify-content-between">
+    <div>
+        <h1>Lista de empresas</h1>
+    </div>
+
+            <div class="pb-2">
+                <input class="form-control"id="myInput" type="text" placeholder="Search...">
+                
+            </div>
+    </div>
 
 
     <?php
@@ -17,7 +26,7 @@ $conexion = conectar();
     $sql = "SELECT * FROM empresa";
     $registros = mysqli_query($conexion, $sql);
 
-    echo "<table class='table table-primary table-hover'>";
+    echo "<table id='myTable' class='table table-primary table-hover'>";
 
     echo "<th>Razon Social</th>";
     echo "<th>RUC</th>";
@@ -134,6 +143,17 @@ include("../includes/foot.php");
 
 
 <script>
+
+$(document).ready(function(){
+        $("#myInput").on("keyup",function(){
+            var value=
+    $(this).val().toLowerCase();
+    $("#myTable tr").filter(function(){
+        $(this).toggle($(this).text().toLowerCase().indexOf(value)>-1)
+    });
+        });
+    });
+
     var ID_EMPRESA;
 
     $(document).ready(function() { //inicio jquery
@@ -227,4 +247,7 @@ include("../includes/foot.php");
             });
         }
     }
+
+   
+
 </script>
