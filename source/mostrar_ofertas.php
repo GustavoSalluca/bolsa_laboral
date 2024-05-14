@@ -31,6 +31,11 @@ $conexion = conectar();
                 $estado_oferta = "No hay cupos";
             }
 
+            $id_usuario = $_SESSION["SESION_ID_USUARIO"];
+            $query_cv = "SELECT ruta_cv FROM usuarios WHERE id = $id_usuario";
+            $resultado_cv = mysqli_query($conexion, $query_cv);
+            $cv_subido = mysqli_fetch_assoc($resultado_cv)['ruta_cv'];
+
     ?>
             <div class="col-md-3 mb-4"> <!-- Crea una columna de 3 para cada tarjeta (12 columnas en total en un row) -->
                 <div class="card">
@@ -84,13 +89,11 @@ $conexion = conectar();
                             <form method="post" action="registrar_postulacion.php">
                                 <input type="hidden" name="id_oferta" value="<?php echo $fila['id']; ?>">
                                 <input type="hidden" name="id_usuario" value="<?php echo $_SESSION["SESION_ID_USUARIO"]; ?>">
-                                <button type="submit" name="postular" class="btn btn-primary">Postular</button>
+                                <button type="submit" name="postular" class="btn btn-primary" onclick="return checkCV()">Postular</button>
                             </form>
                         <?php } else { ?>
                             <button type="button" class="btn btn-secondary" disabled><?php echo $estado_oferta; ?></button>
                         <?php } ?>
-
-
                     </div>
                 </div>
             </div>
@@ -112,3 +115,13 @@ $conexion = conectar();
 <?php
 include("../includes/foot.php");
 ?>
+
+<script>
+    function checkCV() {
+        <?php if (empty($cv_subido)) { ?>
+            alert("No tienes tu CV subido. Por favor, sube tu CV antes de postularte.");
+            return false;
+        <?php } ?>
+        return true;
+    }
+</script>

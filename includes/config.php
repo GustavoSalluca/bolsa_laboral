@@ -9,4 +9,3 @@ if(!defined("PASSWORD")) {define("PASSWORD", "");}
 if(!defined("HOST")) {define("HOST", "");}
 if(!defined("NOMBREBD")) {define("NOMBREBD", "sistema_laboral");}
 //otras constantes necesarias
-?>

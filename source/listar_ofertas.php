@@ -44,7 +44,7 @@ $id_rol = $_SESSION["SESION_ROL"];
     echo "<th>Remuneracion</th>";
     echo "<th>Ubicacion</th>";
     echo "<th>Tipo</th>";
-    echo "<th>Limite Postulantes</th>";
+    echo "<th>Postulantes</th>";
     echo "<th>Acciones</th>";
 
     while ($fila = mysqli_fetch_array($registros)) {

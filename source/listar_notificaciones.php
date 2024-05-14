@@ -31,7 +31,13 @@ if ($resultado === false) {
     if (mysqli_num_rows($resultado) > 0) {
         // Muestra las notificaciones
         while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<div>" . $fila['mensaje'] . "</div>";
+            // Card de Bootstrap para mostrar el mensaje de notificación
+            echo '<div class="card mb-3">';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">Notificación</h5>';
+            echo '<p class="card-text">' . $fila['mensaje'] . '</p>';
+            echo '</div>';
+            echo '</div>';
         }
     } else {
         echo "No tienes notificaciones.";
