@@ -1,11 +1,10 @@
 <?php
 include("../includes/conectar.php");
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     if (isset($_POST['id']) && !empty($_POST['id'])) {
         $id = $_POST['id'];
-
 
         $dni = $_POST['txt_dni'];
         $nombres = $_POST['txt_nombres'];
@@ -39,4 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Solicitud no válida.";
 }
 
-header("location: listar_usuarios.php");
+// Verificar el rol del usuario
+if (isset($_SESSION['SESION_ROL']) && $_SESSION['SESION_ROL'] == '1') {
+    header("Location: listar_usuarios.php");
+} else {
+    header("Location: perfil.php");
+}
+
+

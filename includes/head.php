@@ -3,28 +3,6 @@ include ("config.php");
 
 session_start();
 
-// Suponiendo que tienes una conexión a la base de datos, puedes obtener la ruta de la imagen del usuario actual
-// Aquí se asume que tienes una tabla llamada 'usuarios' y un campo 'ruta_imagen' que almacena la ruta de la imagen de perfil
-/*if (isset($_SESSION['SESION_ID_USUARIO'])) {
-    
-    $conexion = conectar(); // Función para establecer la conexión a la base de datos
-
-    $id_usuario = $_SESSION['SESION_ID_USUARIO'];
-    $query = "SELECT ruta_imagen FROM usuarios WHERE id = $id_usuario";
-    $resultado = mysqli_query($conexion, $query);
-
-    if ($fila = mysqli_fetch_assoc($resultado)) {
-        $ruta_imagen = $fila['ruta_imagen'];
-    } else {
-        // Si no se encuentra la ruta de la imagen, puedes establecer una imagen por defecto o dejarla vacía
-        $ruta_imagen = ""; // Establecer una ruta de imagen por defecto
-    }
-
-    mysqli_close($conexion);
-} else {
-    // Si no hay una sesión iniciada, puedes establecer una imagen por defecto o dejarla vacía
-    $ruta_imagen = ""; // Establecer una ruta de imagen por defecto
-}*/
 ?>
 
 <!DOCTYPE html>
