@@ -8,6 +8,8 @@ $conexion = conectar();
 <?php
 if(isset($_GET['id_oferta'])) {
     $id_oferta = $_GET['id_oferta'];
+
+    echo "<script> var idOferta = $id_oferta; </script>";
     
     $query = "SELECT u.id, u.nombres, u.apellidos, u.dni, u.telefono, u.direccion, u.ruta_cv FROM postulaciones p INNER JOIN usuarios u ON p.id_usuario = u.id WHERE p.id_oferta = $id_oferta";
     $result = mysqli_query($conexion, $query);
@@ -29,7 +31,7 @@ if(isset($_GET['id_oferta'])) {
             $tablaUsuarios .= "<td>".$row['direccion']."</td>";
             $tablaUsuarios .= "<td><a href='".$row['ruta_cv']."' class='btn btn-primary' download>Descargar</a></td>";
             // Agrega los botones Aceptar y Descalificar
-            $tablaUsuarios .= "<td><button class='btn btn-success' onclick='calificarUsuario(".$row['id'].", true)'>Aceptar</button> <button class='btn btn-danger' onclick='calificarUsuario(".$row['id'].", false)'>Descalificar</button></td>";
+            $tablaUsuarios .= "<td><button class='btn btn-success' onclick='calificarUsuario(".$row['id'].", idOferta, true)'>Aceptar</button> <button class='btn btn-danger' onclick='calificarUsuario(".$row['id'].", idOferta, false)'>Descalificar</button></td>";
             $tablaUsuarios .= "</tr>";
         }
         $tablaUsuarios .= "</table>";
@@ -48,7 +50,7 @@ if(isset($_GET['id_oferta'])) {
 
 <script>
 // Función para calificar un usuario
-function calificarUsuario(idUsuario, aceptado) {
+function calificarUsuario(idUsuario, idOferta, aceptado) {
     // Aquí puedes agregar la lógica para calificar al usuario según el valor de la variable aceptado
     // Por ejemplo, puedes hacer una solicitud AJAX para actualizar la base de datos
     // y luego mostrar un mensaje al usuario si ha sido aceptado
@@ -65,10 +67,11 @@ function calificarUsuario(idUsuario, aceptado) {
                 console.log(xhr.responseText);
             }
         };
-        xhr.send("idUsuario=" + idUsuario);
+        xhr.send("idUsuario=" + idUsuario + "&idOferta=" + idOferta);
     } else {
         // Si el usuario ha sido descalificado, muestra un mensaje
         alert("Lo sentimos, no has sido seleccionado para el puesto de trabajo.");
     }
 }
+
 </script>

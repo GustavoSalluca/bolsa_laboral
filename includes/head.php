@@ -196,7 +196,7 @@ session_start();
                 }else{
                     ?>
                     <li class="nav-item">
-                <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/logout.php">
+                    <a class="nav-link" href="<?php echo RUTAGENERAL; ?>source/logout.php">
                     <i class="bi bi-box-arrow-left"></i>
                     <span>Cerrar Sesion</span></a>
             </li>

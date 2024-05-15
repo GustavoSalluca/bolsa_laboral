@@ -4,7 +4,6 @@ include("../includes/conectar.php");
 $conexion = conectar();
 ?>
 
-
 <div class="container-fluid">
 
     <?php
@@ -31,11 +30,16 @@ $conexion = conectar();
                 $estado_oferta = "No hay cupos";
             }
 
-            $id_usuario = $_SESSION["SESION_ID_USUARIO"];
-            $query_cv = "SELECT ruta_cv FROM usuarios WHERE id = $id_usuario";
-            $resultado_cv = mysqli_query($conexion, $query_cv);
-            $cv_subido = mysqli_fetch_assoc($resultado_cv)['ruta_cv'];
-
+            // Verificar si el usuario está logueado y tiene CV subido
+            $cv_subido = "";
+            $usuario_logueado = false;
+            if (isset($_SESSION['SESION_ID_USUARIO'])) {
+                $usuario_logueado = true;
+                $id_usuario = $_SESSION["SESION_ID_USUARIO"];
+                $query_cv = "SELECT ruta_cv FROM usuarios WHERE id = $id_usuario";
+                $resultado_cv = mysqli_query($conexion, $query_cv);
+                $cv_subido = mysqli_fetch_assoc($resultado_cv)['ruta_cv'];
+            }
     ?>
             <div class="col-md-3 mb-4"> <!-- Crea una columna de 3 para cada tarjeta (12 columnas en total en un row) -->
                 <div class="card">
@@ -57,13 +61,11 @@ $conexion = conectar();
                                 <p><strong>Fecha de Cierre:</strong> <?php echo $fila['fecha_cierre']; ?></p>
                             </div>
                             <div class="col">
-
                                 <div class="d-flex flex-row pt-4">
                                     <span class="material-symbols-outlined">
                                         paid
                                     </span>
                                     <p><strong></strong> <?php echo $fila['remuneracion']; ?></p>
-
                                 </div>
                                 <div class="d-flex flex-row pt-4">
                                     <span class="material-symbols-outlined">
@@ -86,10 +88,12 @@ $conexion = conectar();
                             </div>
                         </div>
                         <?php if ($estado_oferta == "Disponible") { ?>
-                            <form method="post" action="registrar_postulacion.php">
+                            <form method="post" action="<?php echo $usuario_logueado ? 'registrar_postulacion.php' : 'form_login.php'; ?>" onsubmit="return checkCV()">
                                 <input type="hidden" name="id_oferta" value="<?php echo $fila['id']; ?>">
-                                <input type="hidden" name="id_usuario" value="<?php echo $_SESSION["SESION_ID_USUARIO"]; ?>">
-                                <button type="submit" name="postular" class="btn btn-primary" onclick="return checkCV()">Postular</button>
+                                <?php if ($usuario_logueado) { ?>
+                                    <input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
+                                <?php } ?>
+                                <button type="submit" name="postular" class="btn btn-primary">Postular</button>
                             </form>
                         <?php } else { ?>
                             <button type="button" class="btn btn-secondary" disabled><?php echo $estado_oferta; ?></button>
@@ -109,7 +113,6 @@ $conexion = conectar();
     }
     ?>
 
-
 </div>
 
 <?php
@@ -118,7 +121,7 @@ include("../includes/foot.php");
 
 <script>
     function checkCV() {
-        <?php if (empty($cv_subido)) { ?>
+        <?php if ($usuario_logueado && empty($cv_subido)) { ?>
             alert("No tienes tu CV subido. Por favor, sube tu CV antes de postularte.");
             return false;
         <?php } ?>
