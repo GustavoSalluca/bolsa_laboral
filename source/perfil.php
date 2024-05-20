@@ -140,9 +140,12 @@ include("../includes/head.php");
                                     </div>
                                 </td>
                             </tr>
+                            <div class="d-flex justify-content-end mb-3">
+                        <a href="editar_usuario.php?id=<?php echo $fila['id']; ?>" class="btn btn-warning">Editar Usuario</a>
+                    </div>
                         </tbody>
                     </table>
-                    <a href="editar_usuario.php?id=<?php echo $fila['id']; ?>" class="btn btn-warning">Editar Usuario</a>
+                    
                     
                 </div>
                 
