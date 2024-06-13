@@ -23,6 +23,8 @@ $telefono = $_POST['txt_telefono'];
 //conexion a la DB
 //gurdamos datos en tabla usuarios
 
+
+
 $sql = "INSERT INTO empresa (razon_social,ruc,correo,direccion,telefono) VALUES('$razon_social','$ruc','$correo','$direccion','$telefono') ";
 
 mysqli_query($conexion, $sql) or die("Error al guardar.");

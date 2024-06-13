@@ -2,6 +2,11 @@
 include("../includes/head.php");
 include("../includes/conectar.php");
 $conexion = conectar();
+if ($_SESSION==NULL){
+    header("Location: login.php");
+}else{
+    
+
 ?>
 
 <!-- Begin Page Content -->
@@ -137,6 +142,7 @@ $conexion = conectar();
 
 <!-- /.container-fluid -->
 <?php
+}
 include("../includes/foot.php");
 ?>
 

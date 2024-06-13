@@ -7,6 +7,8 @@ session_start();
 
 //Recibimos datos del formulario
 
+
+
 $titulo = $_POST['txt_titulo'];
 $descripcion = $_POST['txt_descripcion'];
 $fecha_publicacion = date('Y-m-d', strtotime($_POST['txt_fecha_publicacion'])); // Convertir la fecha al formato deseado
