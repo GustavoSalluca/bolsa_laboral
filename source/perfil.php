@@ -47,11 +47,19 @@ include("../includes/head.php");
 
             $porcentajeCompletado = ($camposCompletados / $totalCampos) * 100;
             $porcentajeFaltante = 100 - $porcentajeCompletado;
+
+            // Obtener información de la empresa si el usuario tiene rol 2
+            $empresa = null;
+            if ($fila['id_rol'] == 2 && !empty($fila['id_empresa'])) {
+                $sql_empresa = "SELECT * FROM empresa WHERE id = " . $fila['id_empresa'];
+                $resultado_empresa = mysqli_query($conexion, $sql_empresa);
+                if (mysqli_num_rows($resultado_empresa) > 0) {
+                    $empresa = mysqli_fetch_assoc($resultado_empresa);
+                }
+            }
     ?>
 
             <!-- Gráfico de torta -->
-            
-
             <div class="row">
                 <div class="col-md-4 text-center">
                     <div class="position-relative mb-3" id="profile-picture-container" style="width: 150px; height: 150px; overflow: hidden; border-radius: 50%; margin: 0 auto; border: 2px solid #ccc;">
@@ -107,12 +115,23 @@ include("../includes/head.php");
                                 <td><strong>Contraseña:</strong></td>
                                 <td><?php echo "********"; ?></td>
                             </tr>
+                            <?php if ($empresa) { ?>
+                            <tr>
+                                <td><strong>Empresa:</strong></td>
+                                <td><?php echo $empresa["razon_social"]; ?></td>
+                            </tr>
+                            <?php } ?>
                             <tr>
                                 <td>
                                     <!-- Botón para abrir el modal -->
                                     <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#subirArchivoModal">
                                         Subir Archivo
                                     </button>
+
+                                    <!-- Mostrar el nombre del archivo subido -->
+                                    <?php if (!empty($fila["ruta_cv"])) { ?>
+                                        <span class="ml-2"><?php echo basename($fila["ruta_cv"]); ?></span>
+                                    <?php } ?>
 
                                     <!-- Modal para subir archivo -->
                                     <div class="modal fade" id="subirArchivoModal" tabindex="-1" role="dialog" aria-labelledby="subirArchivoModalLabel" aria-hidden="true">
@@ -141,14 +160,11 @@ include("../includes/head.php");
                                 </td>
                             </tr>
                             <div class="d-flex justify-content-end mb-3">
-                        <a href="editar_usuario.php?id=<?php echo $fila['id']; ?>" class="btn btn-warning">Editar Usuario</a>
-                    </div>
+                                <a href="editar_usuario.php?id=<?php echo $fila['id']; ?>" class="btn btn-warning">Editar Usuario</a>
+                            </div>
                         </tbody>
                     </table>
-                    
-                    
                 </div>
-                
             </div>
             <div class="mt-4">
                 <canvas id="perfilCompletoChart"></canvas>

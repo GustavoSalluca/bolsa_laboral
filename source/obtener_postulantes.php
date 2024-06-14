@@ -31,7 +31,7 @@ if(isset($_GET['id_oferta'])) {
             $tablaUsuarios .= "<td>".$row['direccion']."</td>";
             $tablaUsuarios .= "<td><a href='".$row['ruta_cv']."' class='btn btn-primary' download>Descargar</a></td>";
             // Agrega los botones Aceptar y Descalificar
-            $tablaUsuarios .= "<td><button class='btn btn-success' onclick='calificarUsuario(".$row['id'].", idOferta, true)'>Aceptar</button> <button class='btn btn-danger' onclick='calificarUsuario(".$row['id'].", idOferta, false)'>Descalificar</button></td>";
+            $tablaUsuarios .= "<td><button class='btn btn-success' onclick='calificarUsuario(".$row['id'].", idOferta, true)'>Aceptar</button> <button class='btn btn-danger' onclick='descalificarUsuario(".$row['id'].", idOferta, false)'>Descalificar</button></td>";
             $tablaUsuarios .= "</tr>";
         }
         $tablaUsuarios .= "</table>";
@@ -43,35 +43,41 @@ if(isset($_GET['id_oferta'])) {
 } else {
     echo "<p>Error: ID de oferta no especificado.</p>";
 }
-
-
 ?>
 </div>
 
 <script>
 // Función para calificar un usuario
 function calificarUsuario(idUsuario, idOferta, aceptado) {
-    // Aquí puedes agregar la lógica para calificar al usuario según el valor de la variable aceptado
-    // Por ejemplo, puedes hacer una solicitud AJAX para actualizar la base de datos
-    // y luego mostrar un mensaje al usuario si ha sido aceptado
-    if (aceptado) {
-        // Si el usuario ha sido aceptado, muestra un mensaje
-        alert("¡Felicidades! Has sido seleccionado para el puesto de trabajo.");
-        
-        // Envía una notificación al usuario
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "notificaciones.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                console.log(xhr.responseText);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "calificar_usuario.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            alert(xhr.responseText);
+            if (!aceptado) {
+                // Actualizar el estado en la interfaz
+                var row = document.querySelector('button[onclick="calificarUsuario(' + idUsuario + ', ' + idOferta + ', false)"]').parentElement.parentElement;
+                row.querySelector('td:nth-child(7)').innerHTML = '<button class="btn btn-secondary" disabled>Descalificado</button>';
             }
-        };
-        xhr.send("idUsuario=" + idUsuario + "&idOferta=" + idOferta);
-    } else {
-        // Si el usuario ha sido descalificado, muestra un mensaje
-        alert("Lo sentimos, no has sido seleccionado para el puesto de trabajo.");
-    }
+        }
+    };
+    xhr.send("idUsuario=" + idUsuario + "&idOferta=" + idOferta + "&aceptado=" + aceptado);
 }
 
+// Función para descalificar un usuario
+function descalificarUsuario(idUsuario, idOferta) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "descalificar_usuario.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            alert(xhr.responseText);
+            // Actualizar el estado en la interfaz
+            var row = document.querySelector('button[onclick="descalificarUsuario(' + idUsuario + ', ' + idOferta + ')"]').parentElement.parentElement;
+            row.querySelector('td:nth-child(7)').innerHTML = '<button class="btn btn-secondary" disabled>Descalificado</button>';
+        }
+    };
+    xhr.send("idUsuario=" + idUsuario + "&idOferta=" + idOferta);
+}
 </script>

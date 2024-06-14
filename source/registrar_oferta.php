@@ -8,75 +8,80 @@ include("../includes/head.php");
 ?>
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid d-flex justify-content-center">
 
-  <h1>Registro de Oferta Laboral </h1>
-  <!-- Inicio Zona  central del sistema  -->
+  <div class="col-md-8"> <!-- Ajusta el tamaño del contenedor aquí -->
+    <h1 class="text-center">Registro de Oferta Laboral</h1>
+    <!-- Inicio Zona  central del sistema  -->
 
-  <form method="POST" action="guardar_oferta.php">
+    <form method="POST" action="guardar_oferta.php">
 
-    <div class="form-group row">
-      <label for="txt_titulo" class="col-sm-2 col-form-label">Titulo</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="txt_titulo" id="txt_titulo" required="required">
+      <div class="form-group row">
+        <label for="txt_titulo" class="col-sm-3 col-form-label">Titulo</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="txt_titulo" id="txt_titulo" required="required">
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="txt_descripcion" class="col-sm-2 col-form-label">Descripcion</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="txt_descripcion" id="txt_descripcion" required="required">
+      <div class="form-group row">
+        <label for="txt_descripcion" class="col-sm-3 col-form-label">Descripcion</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="txt_descripcion" id="txt_descripcion" required="required">
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="txt_fecha_publicacion" class="col-sm-2 col-form-label">Fechas</label>
-      <div class="col-sm-5">
-        <input type="text" class="form-control datepicker" name="txt_fecha_publicacion" placeholder="Fecha Publicacion" required="required">
+      <div class="form-group row">
+        <label for="txt_fecha_publicacion" class="col-sm-3 col-form-label">Fecha Publicación</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control datepicker" name="txt_fecha_publicacion" placeholder="Fecha Publicacion" required="required">
+        </div>
       </div>
-      <div class="col-sm-5">
-        <input type="text" class="form-control datepicker" name="txt_fecha_cierre" placeholder="Fecha Cierre" required="required">
-      </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="txt_remuneracion" class="col-sm-2 col-form-label">Remuneracion</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="txt_remuneracion" id="txt_remuneracion" pattern="\d+(\.\d{1,2})?" title="Solo números y punto decimal" required="required">
+      <div class="form-group row">
+        <label for="txt_fecha_cierre" class="col-sm-3 col-form-label">Fecha Cierre</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control datepicker" name="txt_fecha_cierre" placeholder="Fecha Cierre" required="required">
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="txt_ubicacion" class="col-sm-2 col-form-label">Ubicacion</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="txt_ubicacion" id="txt_ubicacion" required="required">
+      <div class="form-group row">
+        <label for="txt_remuneracion" class="col-sm-3 col-form-label">Remuneracion</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="txt_remuneracion" id="txt_remuneracion" pattern="\d+(\.\d{1,2})?" title="Solo números y punto decimal" required="required">
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="txt_tipo" class="col-sm-2 col-form-label">Tipo</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="txt_tipo" id="txt_tipo" pattern="[A-Za-z\s]+" title="Solo letras permitidas" required="required">
+      <div class="form-group row">
+        <label for="txt_ubicacion" class="col-sm-3 col-form-label">Ubicacion</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="txt_ubicacion" id="txt_ubicacion" required="required">
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="txt_limite_postulantes" class="col-sm-2 col-form-label">Limite Postulantes</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="txt_limite_postulantes" id="txt_limite_postulantes" pattern="\d{1,2}" title="Solo números permitidos, máximo dos dígitos" required="required">
+      <div class="form-group row">
+        <label for="txt_tipo" class="col-sm-3 col-form-label">Tipo</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="txt_tipo" id="txt_tipo" pattern="[A-Za-z\s]+" title="Solo letras permitidas" required="required">
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary">Guardar Oferta</button>
+      <div class="form-group row">
+        <label for="txt_limite_postulantes" class="col-sm-3 col-form-label">Limite Postulantes</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="txt_limite_postulantes" id="txt_limite_postulantes" pattern="\d{1,2}" title="Solo números permitidos, máximo dos dígitos" required="required">
+        </div>
       </div>
-    </div>
 
-  </form>
-  <!-- Fin Zona  central del sistema  -->
+      <div class="form-group row">
+        <div class="col-sm-9 offset-sm-3">
+          <button type="submit" class="btn btn-primary">Guardar Oferta</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
 </div>
-<!-- /.container-fluid -->
+
 <?php
 include("../includes/foot.php");
 ?>

@@ -4,6 +4,32 @@ include ("config.php");
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+// Incluir archivo de conexión a la base de datos
+include_once("conectar.php");
+
+// Establecer conexión
+$conexion = conectar();
+
+// Inicializar variable para el nombre de la empresa
+$nombre_empresa = "";
+
+// Verificar si el usuario ha iniciado sesión y tiene el rol de 2
+if (isset($_SESSION["SESION_ID_USUARIO"]) && $_SESSION["SESION_ROL"] == '2') {
+    $id_usuario = $_SESSION["SESION_ID_USUARIO"];
+    
+    // Obtener el nombre de la empresa a la que está asignado el usuario
+    $sql = "SELECT e.razon_social 
+            FROM empresa e 
+            INNER JOIN usuarios u ON e.id = u.id_empresa 
+            WHERE u.id = $id_usuario";
+    $resultado = mysqli_query($conexion, $sql);
+    
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        $fila = mysqli_fetch_assoc($resultado);
+        $nombre_empresa = $fila['razon_social'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,11 +46,8 @@ if (session_status() == PHP_SESSION_NONE) {
     <title>Sistema de bolsa laboral</title>
 
     <!-- Custom fonts for this template-->
-    <link href="<?php echo RUTAGENERAL; ?>themplates/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-        type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="<?php echo RUTAGENERAL; ?>themplates/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="<?php echo RUTAGENERAL; ?>css/sb-admin-2.min.css" rel="stylesheet">
@@ -47,8 +70,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <img src="<?php echo RUTAGENERAL; ?>themplates/img/portafolio.png" alt="" width="30px"
-                        style="margin-right: 5px;">
+                    <img src="<?php echo RUTAGENERAL; ?>themplates/img/portafolio.png" alt="" width="30px" style="margin-right: 5px;">
                 </div>
                 <div class="sidebar-brand-text mx-1">Bolsa Laboral</div>
             </a>
@@ -195,15 +217,16 @@ if (session_status() == PHP_SESSION_NONE) {
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow d-flex flex-row-reverse">
 
-                    <!-- <img src="<?php echo $fila["ruta_imagen"]; ?>" alt="Imagen de perfil" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;"> -->
-
                     <div class="d-none d-sm-inline-block mr-2">
                     <?php
-                        if(isset($_SESSION['SESION_NOMBRES']))
-                            echo "Bienvenido ".$_SESSION['SESION_NOMBRES']." ".$_SESSION['SESION_APELLIDOS'];
-                        else
-                            echo "Inicie sesion"
-
+                        if(isset($_SESSION['SESION_NOMBRES'])) {
+                            echo "Bienvenido " . $_SESSION['SESION_NOMBRES'] . " " . $_SESSION['SESION_APELLIDOS'];
+                            if ($_SESSION["SESION_ROL"] == '2' && !empty($nombre_empresa)) {
+                                echo " (" . $nombre_empresa . ")";
+                            }
+                        } else {
+                            echo "Inicie sesion";
+                        }
                     ?>
                     </div>
                 </nav>

@@ -25,7 +25,11 @@ $total_ofertas = mysqli_fetch_assoc($resultado_total)['total'];
 $total_paginas = ceil($total_ofertas / $resultados_por_pagina);
 
 // Consulta para obtener las ofertas laborales filtradas por el término de búsqueda con límite y offset
-$sql = "SELECT * FROM oferta_laboral WHERE titulo LIKE '%$query%' OR descripcion LIKE '%$query%' ORDER BY id DESC LIMIT $resultados_por_pagina OFFSET $offset";
+$sql = "SELECT oferta_laboral.*, empresa.razon_social AS nombre_empresa FROM oferta_laboral 
+        JOIN empresa ON oferta_laboral.id_empresa = empresa.id
+        WHERE oferta_laboral.titulo LIKE '%$query%' OR oferta_laboral.descripcion LIKE '%$query%' 
+        ORDER BY oferta_laboral.id DESC 
+        LIMIT $resultados_por_pagina OFFSET $offset";
 $resultado = mysqli_query($conexion, $sql);
 ?>
 
@@ -54,12 +58,20 @@ if (mysqli_num_rows($resultado) > 0) {
         // Verificar si el usuario está logueado y tiene CV subido
         $cv_subido = "";
         $usuario_logueado = false;
+        $rol_usuario = null;
+        $ya_postulado = false;
         if (isset($_SESSION['SESION_ID_USUARIO'])) {
             $usuario_logueado = true;
             $id_usuario = $_SESSION["SESION_ID_USUARIO"];
+            $rol_usuario = $_SESSION["SESION_ROL"];
             $query_cv = "SELECT ruta_cv FROM usuarios WHERE id = $id_usuario";
             $resultado_cv = mysqli_query($conexion, $query_cv);
             $cv_subido = mysqli_fetch_assoc($resultado_cv)['ruta_cv'];
+
+            // Verificar si el usuario ya ha postulado a esta oferta
+            $query_postulacion = "SELECT COUNT(*) AS total FROM postulaciones WHERE id_usuario = $id_usuario AND id_oferta = " . $fila['id'];
+            $resultado_postulacion = mysqli_query($conexion, $query_postulacion);
+            $ya_postulado = mysqli_fetch_assoc($resultado_postulacion)['total'] > 0;
         }
 ?>
         <div class="col-md-3 mb-4"> <!-- Crea una columna de 3 para cada tarjeta (12 columnas en total en un row) -->
@@ -108,14 +120,23 @@ if (mysqli_num_rows($resultado) > 0) {
                                     </span> </strong> <?php echo $fila['limite_postulantes']; ?></p>
                         </div>
                     </div>
-                    <?php if ($estado_oferta == "Disponible") { ?>
-                        <form method="post" action="<?php echo $usuario_logueado ? 'registrar_postulacion.php' : 'form_login.php'; ?>" onsubmit="return checkCV()">
+                    <div class="row">
+                        <div class="col">
+                            <p><strong><span class="material-symbols-outlined">
+                                        business
+                                    </span> Empresa:</strong> <?php echo $fila['nombre_empresa']; ?></p>
+                        </div>
+                    </div>
+                    <?php if ($estado_oferta == "Disponible" && !$ya_postulado && $rol_usuario != '1' && $rol_usuario != '2') { ?>
+                        <form method="post" action="<?php echo $usuario_logueado ? 'registrar_postulacion.php' : 'form_login.php'; ?>" onsubmit="return confirmPostulacion()">
                             <input type="hidden" name="id_oferta" value="<?php echo $fila['id']; ?>">
                             <?php if ($usuario_logueado) { ?>
                                 <input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?>">
                             <?php } ?>
                             <button type="submit" name="postular" class="btn btn-primary">Postular</button>
                         </form>
+                    <?php } elseif ($ya_postulado) { ?>
+                        <button type="button" class="btn btn-secondary" disabled>Ya postulado</button>
                     <?php } else { ?>
                         <button type="button" class="btn btn-secondary" disabled><?php echo $estado_oferta; ?></button>
                     <?php } ?>
@@ -180,5 +201,9 @@ include("../includes/foot.php");
             return false;
         <?php } ?>
         return true;
+    }
+
+    function confirmPostulacion() {
+        return confirm("¿Estás seguro de que deseas postular a esta oferta?");
     }
 </script>
