@@ -17,7 +17,7 @@ include("includes/head.php");
 </div>
 
 <div class="text-center mt-4">
-    <img src="images/logo 1.jpg" alt="Imagen de búsqueda de empleo" style="max-width: 30%;" class="img-fluid blurry-shadow mx-auto d-block">
+    <img src="https://d3nxvt86yeq388.cloudfront.net" alt="Imagen de búsqueda de empleo" style="max-width: 30%;" class="img-fluid blurry-shadow mx-auto d-block">
 </div>
 
 <div class="row mt-4" >
