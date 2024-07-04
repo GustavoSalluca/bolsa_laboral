@@ -14,4 +14,4 @@ if (!function_exists('conectar')) {
         }
     }
 }
-?>
+
